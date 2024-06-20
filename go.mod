@@ -5,6 +5,7 @@ go 1.22.2
 require (
 	github.com/sdcio/config-server v0.0.22
 	github.com/sdcio/schema-server v0.0.16
+	github.com/sirupsen/logrus v1.9.3
 	sigs.k8s.io/yaml v1.4.0
 )
 
@@ -40,7 +41,6 @@ require (
 	github.com/prometheus/common v0.46.0 // indirect
 	github.com/prometheus/procfs v0.12.0 // indirect
 	github.com/sdcio/sdc-protos v0.0.24 // indirect
-	github.com/sirupsen/logrus v1.9.3 // indirect
 	go4.org/netipx v0.0.0-20231129151722-fdeea329fbba // indirect
 	golang.org/x/net v0.23.0 // indirect
 	golang.org/x/oauth2 v0.17.0 // indirect
