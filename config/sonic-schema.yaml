@@ -1,0 +1,20 @@
+apiVersion: inv.sdcio.dev/v1alpha1
+kind: Schema
+metadata:
+  name: sonic.sdcio.dev-latest
+  namespace: default
+spec:
+  repoURL: https://github.com/henderiw/sonic-schema
+  provider: sonic.sdcio.dev
+  version: latest
+  kind: branch
+  ref: main
+  dirs:
+  - src: .
+    dst: .
+  schema:
+    models:
+    - yang-models
+    includes:
+    - yang-templates
+    - ietf
