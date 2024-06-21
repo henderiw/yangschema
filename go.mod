@@ -4,7 +4,7 @@ go 1.22.2
 
 require (
 	github.com/sdcio/config-server v0.0.22
-	github.com/sdcio/schema-server v0.0.16
+	github.com/sdcio/schema-server v0.0.17
 	github.com/sirupsen/logrus v1.9.3
 	sigs.k8s.io/yaml v1.4.0
 )

@@ -1,14 +1,10 @@
-module sonic-tc-priority-group-map {
+module sonic-pfc-priority-priority-group-map {
 
     yang-version 1.1;
 
-    namespace "http://github.com/sonic-net/sonic-tc-priority-group-map";
+    namespace "http://github.com/sonic-net/sonic-pfc-priority-priority-group-map";
 
-    prefix tpgm;
-
-    import sonic-types {
-        prefix stypes;
-    }
+    prefix pppgm;
 
     organization
         "SONiC";
@@ -17,20 +13,20 @@ module sonic-tc-priority-group-map {
         "SONiC";
 
     description
-        "TC_TO_PRIORITY_GROUP_MAP yang Module for SONiC OS";
+        "PFC_PRIORITY_TO_PRIORITY_GROUP_MAP yang Module for SONiC OS";
 
     revision 2021-04-15 {
         description
             "Initial revision.";
     }
 
-    container sonic-tc-priority-group-map {
+    container sonic-pfc-priority-priority-group-map {
 
-        container TC_TO_PRIORITY_GROUP_MAP {
+        container PFC_PRIORITY_TO_PRIORITY_GROUP_MAP {
 
-            description "TC_TO_PRIORITY_GROUP_MAP part of config_db.json";
+            description "PFC_PRIORITY_TO_PRIORITY_GROUP_MAP part of config_db.json";
 
-            list TC_TO_PRIORITY_GROUP_MAP_LIST {
+            list PFC_PRIORITY_TO_PRIORITY_GROUP_MAP_LIST {
 
                 key "name";
 
@@ -44,12 +40,17 @@ module sonic-tc-priority-group-map {
                     }
                 }
 
-                list TC_TO_PRIORITY_GROUP_MAP { //this is list inside list for storing mapping between two fields
+                list PFC_PRIORITY_TO_PRIORITY_GROUP_MAP { //this is list inside list for storing mapping between two fields
 
-                    key "tc";
+                    key "pfc_priority";
 
-                    leaf tc {
-                        type stypes:tc_type;
+                    leaf pfc_priority {
+                        type string {
+                            pattern "[0-7]?" {
+                               error-message "Invalid pfc priority";
+                               error-app-tag pfc-priority-invalid;
+                            }
+                        }
                     }
 
                     leaf pg {

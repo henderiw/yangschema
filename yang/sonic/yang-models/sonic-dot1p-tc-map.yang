@@ -1,10 +1,10 @@
-module sonic-tc-priority-group-map {
+module sonic-dot1p-tc-map {
 
     yang-version 1.1;
 
-    namespace "http://github.com/sonic-net/sonic-tc-priority-group-map";
+    namespace "http://github.com/sonic-net/sonic-dot1p-tc-map";
 
-    prefix tpgm;
+    prefix dot1ptm;
 
     import sonic-types {
         prefix stypes;
@@ -17,20 +17,20 @@ module sonic-tc-priority-group-map {
         "SONiC";
 
     description
-        "TC_TO_PRIORITY_GROUP_MAP yang Module for SONiC OS";
+        "DOT1P_TO_TC_MAP yang Module for SONiC OS";
 
     revision 2021-04-15 {
         description
             "Initial revision.";
     }
 
-    container sonic-tc-priority-group-map {
+    container sonic-dot1p-tc-map {
 
-        container TC_TO_PRIORITY_GROUP_MAP {
+        container DOT1P_TO_TC_MAP {
 
-            description "TC_TO_PRIORITY_GROUP_MAP part of config_db.json";
+            description "DOT1P_TO_TC_MAP part of config_db.json";
 
-            list TC_TO_PRIORITY_GROUP_MAP_LIST {
+            list DOT1P_TO_TC_MAP_LIST {
 
                 key "name";
 
@@ -44,21 +44,21 @@ module sonic-tc-priority-group-map {
                     }
                 }
 
-                list TC_TO_PRIORITY_GROUP_MAP { //this is list inside list for storing mapping between two fields
+                list DOT1P_TO_TC_MAP { //this is list inside list for storing mapping between two fields
 
-                    key "tc";
+                    key "dot1p";
+
+                    leaf dot1p {
+                        type string {
+                            pattern "[0-7]?" {
+                                error-message "Invalid DOT1P";
+                                error-app-tag dot1p-invalid;
+                            }
+                        }
+                    }
 
                     leaf tc {
                         type stypes:tc_type;
-                    }
-
-                    leaf pg {
-                        type string {
-                            pattern "[0-7]?" {
-                                error-message "Invalid Priority Group";
-                                error-app-tag pg-invalid;
-                            }
-                        }
                     }
                 }
             }

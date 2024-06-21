@@ -1,10 +1,10 @@
-module sonic-dscp-tc-map {
+module sonic-mpls-tc-map {
 
     yang-version 1.1;
 
-    namespace "http://github.com/sonic-net/sonic-dscp-tc-map";
+    namespace "http://github.com/sonic-net/sonic-mpls-tc-map";
 
-    prefix dtm;
+    prefix mpls_tc_map;
 
     import sonic-types {
         prefix stypes;
@@ -17,24 +17,25 @@ module sonic-dscp-tc-map {
         "SONiC";
 
     description
-        "DSCP_TO_TC_MAP yang Module for SONiC OS";
+        "MPLS_TC_TO_TC_MAP yang Module for SONiC OS";
 
     revision 2021-04-15 {
         description
             "Initial revision.";
     }
 
-    container sonic-dscp-tc-map {
+    container sonic-mpls-tc-map {
 
-        container DSCP_TO_TC_MAP {
+        container MPLS_TC_TO_TC_MAP {
 
-            description "DSCP_TO_TC_MAP part of config_db.json";
+            description "MPLS_TC_TO_TC_MAP part of config_db.json";
 
-            list DSCP_TO_TC_MAP_LIST {
+            list MPLS_TC_TO_TC_MAP_LIST {
 
                 key "name";
 
                 leaf name {
+                    description "Name of MPLS TC Mpping List";
                     type string {
                         pattern '[a-zA-Z0-9]{1}([-a-zA-Z0-9_]{0,31})';
                         length 1..32 {
@@ -44,20 +45,22 @@ module sonic-dscp-tc-map {
                     }
                 }
 
-                list DSCP_TO_TC_MAP { //this is list inside list for storing mapping between two fields
+                list MPLS_TC_TO_TC_MAP { //this is list inside list for storing mapping between two fields
 
-                    key "dscp";
+                    key "mpls";
 
-                    leaf dscp {
+                    leaf mpls {
+                        description "MPLS TC Value";
                         type string {
-                            pattern "6[0-3]|[1-5][0-9]?|[0-9]?" {
-                                error-message "Invalid DSCP";
-                                error-app-tag dscp-invalid;
+                            pattern "[0-7]?" {
+                                error-message "Invalid MPLS";
+                                error-app-tag mpls-invalid;
                             }
                         }
                     }
 
                     leaf tc {
+                        description "Matching TC Value";
                         type stypes:tc_type;
                     }
                 }

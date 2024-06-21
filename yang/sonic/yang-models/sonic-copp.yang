@@ -1,29 +1,47 @@
-module sonic-policer {
+module sonic-copp {
 
 	yang-version 1.1;
 
-	namespace "http://github.com/sonic-net/sonic-policer";
-	prefix policer;
+	namespace "http://github.com/sonic-net/sonic-copp";
+	prefix copp;
 
 	import sonic-types {
 		prefix stypes;
 	}
 
-	description "Policer YANG Module for SONiC OS";
+	description "CoPP YANG Module for SONiC OS";
 
-	revision 2022-02-03 {
+	revision 2021-03-31 {
 		description
 			"First Revision";
 	}
 
-	container sonic-policer {
-		container POLICER {
-			list POLICER_LIST {
+	container sonic-copp {
+		container COPP_GROUP {
+			list COPP_GROUP_LIST {
 				key name;
 
 				leaf name {
 					type string;
-					description "Policer name";
+					description "Control plane policing group name";
+				}
+
+				leaf queue {
+					type uint32;
+					default 0;
+					description "CPU Rx queue id";
+				}
+
+				leaf trap_priority {
+					type uint32;
+					default 0;
+					description "Trap priority";
+				}
+
+				leaf trap_action {
+					mandatory true;
+					type stypes:policer_packet_action;
+					description "Trap action";
 				}
 
 				leaf meter_type {
@@ -34,12 +52,16 @@ module sonic-policer {
 
 				leaf mode {
 					mandatory true;
-                                        type stypes:policer_mode;
+					type enumeration {
+						enum sr_tcm;
+						enum tr_tcm;
+						enum storm;
+					}
 					description "Policer mode";
 				}
 
-  				leaf color {
-                                        type stypes:policer_color_source;
+				leaf color {
+					type stypes:policer_color_source;
 					description "Policer color Source";
 				}
 
@@ -49,8 +71,7 @@ module sonic-policer {
 					description
 						"Committed information rate for the dual-rate token
 						bucket policer.  This value represents the rate at which
-						tokens are added to the primary bucket. Unit is bytes/sec
-						or packets/sec based on meter_type";
+						tokens are added to the primary bucket.";
 				}
 
 				leaf cbs {
@@ -65,7 +86,7 @@ module sonic-policer {
 					description
 						"Committed burst size for the dual-rate token bucket
 						policer.  This value represents the depth of the token
-						bucket. Unit is bytes or packets based on meter_type";
+						bucket.";
 				}
 
 				leaf pir {
@@ -80,8 +101,7 @@ module sonic-policer {
 					description
 						"Peak information rate for the dual-rate token bucket
 						policer.  This value represents the rate at which tokens
-						are added to the secondary bucket. Unit is bytes/sec or
-						packets/sec based on meter_type";
+						are added to the secondary bucket.";
 				}
 
 				leaf pbs {
@@ -92,33 +112,81 @@ module sonic-policer {
 					type uint64;
 					description
 						"Excess burst size for the dual-rate token bucket policer.
-						This value represents the depth of the secondary bucket. Unit
-						is bytes or packets based on meter_type";
+						This value represents the depth of the secondary bucket.";
 				}
 
-				leaf green_packet_action {
+				leaf green_action {
 					type stypes:policer_packet_action;
 					default "forward";
 					description "Green action";
 				}
 
-				leaf yellow_packet_action {
+				leaf yellow_action {
 					when "((current()/../mode = 'sr_tcm') or (current()/../mode = 'tr_tcm'))";
 					type stypes:policer_packet_action;
 					default "forward";
 					description "Yellow action";
 				}
 
-				leaf red_packet_action {
+				leaf red_action {
 					type stypes:policer_packet_action;
 					default "forward";
 					description "Red action";
 				}
 			}
-			/* end of list POLICER_LIST */
+			/* end of list COPP_GROUP_LIST */
 		}
-		/* end of container POLICER */
+		/* end of container COPP_GROUP */
+
+		container COPP_TRAP {
+			list COPP_TRAP_LIST {
+				key name;
+
+				leaf name {
+					type string;
+					description "Control plane policing trap name";
+				}
+
+				leaf trap_ids {
+					mandatory true;
+					type string;
+					description "list of trap_ids";
+				}
+
+				leaf trap_group {
+					type leafref {
+						path "/sonic-copp/COPP_GROUP/COPP_GROUP_LIST/name";
+					}
+					description "reference to CoPP group";
+				}
+
+				leaf always_enabled {
+					type boolean;
+					description "field that indicates whether the trap should be always installed";
+				}
+			}
+			/* end of list COPP_TRAP_LIST */
+		}
+		/* end of container COPP_TRAP */
 	}
 	/* end of top level container */
+
+	rpc get-match-protocols {
+		description
+			"RPC to get allowed match protocols";
+
+		output {
+			list Match_protocols {
+				key "Protocol";
+
+				leaf Protocol {
+					type string;
+					description
+						"Protocol name";
+				}
+			}
+		}
+	}
+	/* end of rpc get-match-protocols */
 }
-/* end of module sonic-policer */
+/* end of module sonic-copp */

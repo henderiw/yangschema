@@ -16,5 +16,4 @@ spec:
     models:
     - yang-models
     includes:
-    - yang-templates
     - ietf

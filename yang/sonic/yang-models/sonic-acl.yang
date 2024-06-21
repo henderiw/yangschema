@@ -1,3 +1,4 @@
+/* this is sonic py yang model */
 module sonic-acl {
 
 	yang-version 1.1;

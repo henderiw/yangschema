@@ -147,8 +147,8 @@ github.com/rogpeppe/go-internal v1.11.0 h1:cWPaGQEPrBb5/AsnsZesgZZ9yb1OQ+GOISoDN
 github.com/rogpeppe/go-internal v1.11.0/go.mod h1:ddIwULY96R17DhadqLgMfk9H9tvdUzkipdSkR5nkCZA=
 github.com/sdcio/config-server v0.0.22 h1:p464LoXMOfVGM5wyqRFVYi7esb2v+QlLblXxykahXxU=
 github.com/sdcio/config-server v0.0.22/go.mod h1:MeFgGsxSd/cVtD2/ORssxjJPTl4RduRg61fZSmwnNaM=
-github.com/sdcio/schema-server v0.0.16 h1:mBm/hj0WQlNN7/S+tBwsf2Mc0XW4coaah27WDcxbTOQ=
-github.com/sdcio/schema-server v0.0.16/go.mod h1:Wp7DRUkX0DQZNARIgcJtCjOuLp5pwUCDVCAuvM5LA5g=
+github.com/sdcio/schema-server v0.0.17 h1:VpaLWkX95tqGVfm2LxEgfDJ/74co8AIJpvwD6TYVmzM=
+github.com/sdcio/schema-server v0.0.17/go.mod h1:Wp7DRUkX0DQZNARIgcJtCjOuLp5pwUCDVCAuvM5LA5g=
 github.com/sdcio/sdc-protos v0.0.24 h1:AEhRfPRQVzb6KMxrFSd+ODiiC605ql7qbg2yxE1ARKQ=
 github.com/sdcio/sdc-protos v0.0.24/go.mod h1:iVVPmQTRzoCV4abQ4QL5mJethvRVfdV8cHcVyDtSNs4=
 github.com/sirupsen/logrus v1.9.3 h1:dueUQJ1C2q9oE3F7wvmSGAaVtTmUizReu6fjN8uqzbQ=
