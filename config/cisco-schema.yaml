@@ -1,0 +1,17 @@
+apiVersion: inv.sdcio.dev/v1alpha1
+kind: Schema
+metadata:
+  name: iosxr.cisco.sdcio.dev
+  namespace: transport-automation
+spec:
+  repoURL: https://github.com/YangModels/yang
+  provider: iosxr.cisco.sdcio.dev
+  version: 24.1.1
+  kind: branch
+  ref: main
+  dirs:
+  - src: vendor/cisco/xr/2411
+    dst: .
+  schema:
+    models:
+    - /

@@ -1,0 +1,19 @@
+apiVersion: inv.sdcio.dev/v1alpha1
+kind: Schema
+metadata:
+  name: iosxr.cisco.sdcio.dev
+  namespace: default
+spec:
+  repoURL: https://github.com/YangModels/yang
+  provider: iosxr.cisco.sdcio.dev
+  version: 24.3.1.20I
+  kind: branch
+  ref: main
+  dirs:
+  - src: standard/ietf/RFC
+    dst: .
+  schema:
+    models:
+    - .
+    includes:
+    excludes:
